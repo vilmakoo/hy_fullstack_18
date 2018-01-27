@@ -34,7 +34,7 @@ class App extends React.Component {
 
     clickNext = () => {
         this.setState({
-            selected: Math.floor(Math.random() * 5) + 1
+            selected: Math.floor(Math.random() * 6)
         })
 
     }
