@@ -20,7 +20,7 @@ blogsRouter.post('/', async (request, response) => {
       return response.status(401).json({ error: 'token missing or invalid' })
     }
 
-    if (body.title === undefined || body.url === undefined) {
+    if (body.title === undefined || body.url === undefined || body.title.length === 0 || body.url.length === 0) {
       return response.status(400).json({ error: 'title or url missing' })
     }
 
@@ -61,9 +61,7 @@ blogsRouter.delete('/:id', async (request, response) => {
     const blog = await Blog.findById(request.params.id)
     const user = await User.findById(decodedToken.id)
 
-    console.log('bloguser: ', blog.user.toString())
-    console.log('user: ', user.toString())
-    if (blog.user.toString() === user.id.toString()) {
+    if (blog.user === undefined || blog.user.toString() === user.id.toString()) {
       await blog.remove()
       response.status(204).end()
     } else {
