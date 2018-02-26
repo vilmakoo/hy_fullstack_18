@@ -1,16 +1,7 @@
-./osa4/blogilista/node_modules
-./osa4/blogilista/.env
+osa4/blogilista/node_modules
+osa4/blogilista/.env
 
-./osa5/bloglist-frontend/node_modules
-./osa5/bloglist-frontend/coverage
-./osa5/bloglist-frontend/build
-./osa5/bloglist-frontend/.DS_Store
-./osa5/bloglist-frontend/.env.local
-./osa5/bloglist-frontend/.env.development.local
-./osa5/bloglist-frontend/.env.test.local
-./osa5/bloglist-frontend/.env.production.local
-./osa5/bloglist-frontend/npm-debug.log*
-./osa5/bloglist-frontend/yarn-debug.log*
-./osa5/bloglist-frontend/yarn-error.log*
-./unicafe/node_modules
-./redux-anecdotes/node_modules
+osa5/blogilista-frontend/node_modules
+
+osa5/unicafe/node_modules
+osa5/redux-anecdotes/node_modules
