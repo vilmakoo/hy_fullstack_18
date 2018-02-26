@@ -12,4 +12,5 @@
 ./osa5/bloglist-frontend/npm-debug.log*
 ./osa5/bloglist-frontend/yarn-debug.log*
 ./osa5/bloglist-frontend/yarn-error.log*
-
+./unicafe/node_modules
+./redux-anecdotes/node_modules
