@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "axios": "^0.18.0",
+    "json-server": "^0.12.1",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
@@ -14,10 +16,11 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "server": "json-server -p3001 db.json"
   },
   "devDependencies": {
-    "babel-eslint": "^8.2.2",
+    "babel-eslint": "^7.2.3",
     "eslint": "^4.18.1",
     "eslint-plugin-jest": "^21.12.2",
     "eslint-plugin-react": "^7.7.0"
