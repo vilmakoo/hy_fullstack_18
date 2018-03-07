@@ -1,18 +1,13 @@
 import React from 'react'
-import { voting } from '../reducers/anecdoteReducer'
-import { notify, clearNotificationField } from '../reducers/notificationReducer'
+import { vote } from '../reducers/anecdoteReducer'
+import { notify } from '../reducers/notificationReducer'
 import { connect } from 'react-redux'
-import anecdoteService from '../services/anecdotes'
 
 const AnecdoteList = (props) => {
   const handleVoting = (anecdote) => async () => {
-    const updatedAnecdote = await anecdoteService.update({ ...anecdote, votes: anecdote.votes + 1 })
-    props.voting(updatedAnecdote)
+    props.vote(anecdote)
 
-    props.notify(`you voted '${updatedAnecdote.content}'`)
-    setTimeout(() => {
-      props.clearNotificationField()
-    }, 5000)
+    props.notify(`you voted '${anecdote.content}'`, 5)
   }
 
   return (
@@ -52,9 +47,8 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = {
-  voting,
-  notify,
-  clearNotificationField
+  vote,
+  notify
 }
 
 const ConnectedAnecdoteList = connect(

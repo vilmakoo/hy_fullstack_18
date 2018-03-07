@@ -17,16 +17,17 @@ const notificationReducer = (state = '', action) => {
   return newState
 }
 
-export const clearNotificationField = () => {
-  return {
-    type: 'CLEAR'
-  }
-}
-
-export const notify = (notification) => {
-  return {
-    type: 'NOTIFY',
-    notification
+export const notify = (notification, seconds) => {
+  return async (dispatch) => {
+    dispatch({
+      type: 'NOTIFY',
+      notification
+    })
+    setTimeout(() => {
+      dispatch({
+        type: 'CLEAR'
+      })
+    }, seconds * 1000)
   }
 }
 

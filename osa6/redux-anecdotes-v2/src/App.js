@@ -4,14 +4,12 @@ import Notification from './components/Notification'
 import AnecdoteForm from './components/AnecdoteForm'
 import AnecdoteList from './components/AnecdoteList'
 import Filter from './components/Filter'
-import { anecdoteInitialization } from './reducers/anecdoteReducer'
-import anecdoteService from './services/anecdotes'
+import { initializeAnecdotes } from './reducers/anecdoteReducer'
 
 class App extends React.Component {
 
-  componentDidMount = async () => {
-    const anecdotes = await anecdoteService.getAll()
-    this.props.anecdoteInitialization(anecdotes)
+  componentDidMount() {
+    this.props.initializeAnecdotes()
   }
 
   render() {
@@ -46,7 +44,7 @@ const mapStateToProps = (state) => {
 
 const ConnectedApp = connect(
   mapStateToProps,
-  { anecdoteInitialization }
+  { initializeAnecdotes }
 )(App)
 
 export default ConnectedApp
