@@ -1,21 +1,33 @@
 import loginService from '../services/login'
 import blogService from '../services/blogs'
+import userService from '../services/users'
 
 const initialState = {
   username: '',
   password: '',
-  user: null
+  user: null,
+  userlist: []
 }
 
 const userReducer = (state = initialState, action) => {
   let newState
 
   switch (action.type) {
+    case 'INIT_USERS':
+      newState = {
+        username: state.username,
+        password: state.password,
+        user: state.user,
+        userlist: action.userlist
+      }
+      break
+
     case 'SET_USER':
       newState = {
         username: '',
         password: '',
-        user: action.user
+        user: action.user,
+        userlist: state.userlist
       }
       break
 
@@ -23,7 +35,8 @@ const userReducer = (state = initialState, action) => {
       newState = {
         username: '',
         password: '',
-        user: null
+        user: null,
+        userlist: state.userlist
       }
       break
 
@@ -58,6 +71,17 @@ export const initializeUser = () => {
   }
 }
 
+export const initializeUserList = () => {
+  return async (dispatch) => {
+    const users = await userService.getAll()
+
+    dispatch({
+      type: 'INIT_USERS',
+      userlist: users
+    })
+  }
+}
+
 export const logout = () => {
   return {
     type: 'LOGOUT'
@@ -73,7 +97,6 @@ export const login = (username, password, onSuccess, onFailure) => {
         username,
         password
       })
-      console.log(user)
       window.localStorage.setItem('loggedBlogAppUser', JSON.stringify(user))
       blogService.setToken(user.token)
       onSuccess()

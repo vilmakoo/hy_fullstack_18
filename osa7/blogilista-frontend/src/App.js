@@ -1,13 +1,16 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 
-import Blog from './components/Blog'
-import BlogForm from './components/BlogForm';
 import Notification from './components/Notification'
 import './index.css'
 import { notify } from './reducers/notificationReducer'
 import { initializeUser, login, logout, setUsername, setPassword } from './reducers/userReducer'
 import { initializeBlogs, addLike, deleteBlog } from './reducers/blogReducer'
+import UserList from './components/UserList'
+import BlogList from './components/BlogList'
+import User from './components/User'
+import users from './services/users';
 
 class App extends React.Component {
   componentDidMount() {
@@ -39,10 +42,6 @@ class App extends React.Component {
       error
     }, 5)
   }
-
-  // updateBlogList = (blog) => {
-  //   this.setState({ blogs: this.state.blogs.concat(blog) })
-  // }
 
   handleLikeOf = (id) => {
     return () => {
@@ -82,8 +81,6 @@ class App extends React.Component {
   render() {
     const loginForm = () => (
       <div>
-        <Notification message={this.props.notification.message} error={this.props.notification.error} />
-
         <h2>Log in to application</h2>
         <form onSubmit={this.login}>
           <div>
@@ -109,31 +106,36 @@ class App extends React.Component {
       </div>
     )
 
-    const blogs = () => (
+    const loggedInView = () => {
+      const userById = (id) => {
+        this.props.users.find(user => user.id === id)
+      }
+
+      return (
       <div>
-        <h2>blogs</h2>
-
-        <Notification message={this.props.notification.message} error={this.props.notification.error} />
-
-        <BlogForm />
-
-        <h2>all blogs</h2>
         <p>{this.props.user.user.name} logged in <button onClick={this.logout}>logout</button></p>
 
-        {this.props.bloglist.sort((blog1, blog2) => {
-          return blog2.likes - blog1.likes
-        }).map(blog =>
-          <Blog key={blog._id} blog={blog} handleLikeOf={this.handleLikeOf} handleDeleteOf={this.handleDeleteOf} />
-          )
-        }
+        <Router>
+          <div>
+            <Route path="/users" render={() => <UserList />} />
+            <Route exact path="/" render={() => <BlogList bloglist={this.props.bloglist} handleLikeOf={this.handleLikeOf} handleDeleteOf={this.handleDeleteOf} />} />
+            <Route exact path="/users/:id" render={({ match }) =>
+              <User user={userById(match.params.id)} />}
+            />
+          </div>
+        </Router>
       </div>
-    )
+      )
+    }
 
     return (
       <div>
+        <h1>HIENO BLOGILISTA</h1>
+        <Notification message={this.props.notification.message} error={this.props.notification.error} />
+
         {this.props.user.user === null ?
           loginForm() :
-          blogs()
+          loggedInView()
         }
       </div>
     )
@@ -145,7 +147,8 @@ const mapStateToProps = (state) => {
     notification: state.notification,
     user: state.user,
     blogs: state.blogs,
-    bloglist: state.blogs.list
+    bloglist: state.blogs.list,
+    users: state.user.userlist
   }
 }
 
