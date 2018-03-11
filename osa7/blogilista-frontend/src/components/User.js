@@ -3,9 +3,9 @@ import { connect } from 'react-redux'
 
 const User = (props) => {
   const { users, userId } = props
-  // console.log(props)
 
   const user = users.find(u => u.id === userId)
+  if (!user) return null
 
   return (
     <div>
@@ -20,7 +20,6 @@ const User = (props) => {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  // console.log(state)
   return {
     users: state.user.userlist,
     userId: ownProps.userId
