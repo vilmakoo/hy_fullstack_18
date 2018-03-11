@@ -8,7 +8,7 @@ const Form = ({ addBlog, title, handleBlogFieldChange, author, url }) => {
     <form onSubmit={addBlog}>
       <div>
         title:
-            <input
+        <input
           type="text"
           name="newBlogTitle"
           value={title}
@@ -17,7 +17,7 @@ const Form = ({ addBlog, title, handleBlogFieldChange, author, url }) => {
       </div>
       <div>
         author:
-            <input
+        <input
           type="text"
           name="newBlogAuthor"
           value={author}
@@ -26,7 +26,7 @@ const Form = ({ addBlog, title, handleBlogFieldChange, author, url }) => {
       </div>
       <div>
         url:
-            <input
+        <input
           type="text"
           name="newBlogUrl"
           value={url}

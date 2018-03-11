@@ -58,7 +58,7 @@ Blog.propTypes = {
   handleDeleteOf: PropTypes.func.isRequired
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   return {
     currentUser: state.user.user
   }
@@ -68,4 +68,4 @@ const ConnectedBlog = connect(
   mapStateToProps
 )(Blog)
 
-export default ConnectedBlog;
+export default ConnectedBlog

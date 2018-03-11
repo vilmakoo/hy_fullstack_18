@@ -22,10 +22,10 @@ const create = async (newObject) => {
 }
 
 const like = async (blog) => {
-  const updatedBlog = {...blog, likes: blog.likes + 1}
+  const updatedBlog = { ...blog, likes: blog.likes + 1 }
 
   await axios.put(`${baseUrl}/${blog._id}`, updatedBlog)
-  
+
   return updatedBlog
 }
 

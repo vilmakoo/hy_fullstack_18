@@ -38,6 +38,6 @@ describe('<Blog />', () => {
     button.simulate('click')
     button.simulate('click')
 
-    expect(mockHandler.mock.calls.length).toBe(2)
+    expect(mockHandler.mock.calls).toHaveLength(2)
   })
 })

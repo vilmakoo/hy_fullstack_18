@@ -8,22 +8,22 @@ const notificationReducer = (state = initialState, action) => {
   let newState = state
 
   switch (action.type) {
-    case 'NOTIFY':
-      newState = {
-        message: action.message,
-        error: action.error
-      }
-      break
+  case 'NOTIFY':
+    newState = {
+      message: action.message,
+      error: action.error
+    }
+    break
 
-    case 'CLEAR':
-      newState = {
-        message: '',
-        error: false
-      }
-      break
+  case 'CLEAR':
+    newState = {
+      message: '',
+      error: false
+    }
+    break
 
-    default:
-      newState = state
+  default:
+    newState = state
   }
 
   return newState

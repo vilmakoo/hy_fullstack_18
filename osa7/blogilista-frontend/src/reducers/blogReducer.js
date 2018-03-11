@@ -11,68 +11,70 @@ const blogReducer = (state = initialState, action) => {
   let newState
 
   switch (action.type) {
-    case 'INIT_BLOGS':
-      newState = {
-        list: action.data,
-        newBlogTitle: '',
-        newBlogAuthor: '',
-        newBlogUrl: ''
-      }
-      break
+  case 'INIT_BLOGS':
+    newState = {
+      list: action.data,
+      newBlogTitle: '',
+      newBlogAuthor: '',
+      newBlogUrl: ''
+    }
+    break
 
-    case 'CREATE':
-      newState = {
-        list: state.list.concat(action.data),
-        newBlogTitle: '',
-        newBlogAuthor: '',
-        newBlogUrl: ''
-      }
-      break
+  case 'CREATE':
+    newState = {
+      list: state.list.concat(action.data),
+      newBlogTitle: '',
+      newBlogAuthor: '',
+      newBlogUrl: ''
+    }
+    break
 
-    case 'DELETE':
-      const deletedBlog = action.data
-      newState = {
-        list: state.list.filter(blog => blog._id !== deletedBlog._id),
-        newBlogTitle: '',
-        newBlogAuthor: '',
-        newBlogUrl: ''
-      }
-      break
+  case 'DELETE': {
+    const deletedBlog = action.data
+    newState = {
+      list: state.list.filter(blog => blog._id !== deletedBlog._id),
+      newBlogTitle: '',
+      newBlogAuthor: '',
+      newBlogUrl: ''
+    }
+  }
+    break
 
-    case 'LIKE':
-      const updatedBlog = action.data
-      newState = {
-        list: state.list.map(blog => blog._id !== updatedBlog._id ? blog : updatedBlog),
-        newBlogTitle: '',
-        newBlogAuthor: '',
-        newBlogUrl: ''
-      }
-      break
+  case 'LIKE': {
+    const updatedBlog = action.data
+    newState = {
+      list: state.list.map(blog => blog._id !== updatedBlog._id ? blog : updatedBlog),
+      newBlogTitle: '',
+      newBlogAuthor: '',
+      newBlogUrl: ''
+    }
+  }
+    break
 
-    case 'SET_NEW_BLOG_TITLE':
-      newState = { ...state, newBlogTitle: action.data }
-      break
+  case 'SET_NEW_BLOG_TITLE':
+    newState = { ...state, newBlogTitle: action.data }
+    break
 
-    case 'SET_NEW_BLOG_AUTHOR':
-      newState = { ...state, newBlogAuthor: action.data }
-      break
+  case 'SET_NEW_BLOG_AUTHOR':
+    newState = { ...state, newBlogAuthor: action.data }
+    break
 
-    case 'SET_NEW_BLOG_URL':
-      newState = { ...state, newBlogUrl: action.data }
-      break
+  case 'SET_NEW_BLOG_URL':
+    newState = { ...state, newBlogUrl: action.data }
+    break
 
-    case 'CLEAR_NEW_BLOG_FIELDS':
-      newState = {
-        ...state,
-        newBlogTitle: '',
-        newBlogAuthor: '',
-        newBlogUrl: ''
-      }
-      break
+  case 'CLEAR_NEW_BLOG_FIELDS':
+    newState = {
+      ...state,
+      newBlogTitle: '',
+      newBlogAuthor: '',
+      newBlogUrl: ''
+    }
+    break
 
-    default:
-      newState = state
-      break
+  default:
+    newState = state
+    break
   }
 
   return newState

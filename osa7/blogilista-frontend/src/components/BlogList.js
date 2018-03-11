@@ -1,6 +1,6 @@
 import React from 'react'
 import Blog from './Blog'
-import BlogForm from './BlogForm';
+import BlogForm from './BlogForm'
 
 const BlogList = ({ bloglist, handleLikeOf, handleDeleteOf }) => (
   <div>
@@ -14,7 +14,7 @@ const BlogList = ({ bloglist, handleLikeOf, handleDeleteOf }) => (
       return blog2.likes - blog1.likes
     }).map(blog =>
       <Blog key={blog._id} blog={blog} handleLikeOf={handleLikeOf} handleDeleteOf={handleDeleteOf} />
-      )
+    )
     }
   </div>
 )

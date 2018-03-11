@@ -1,19 +1,21 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
+
 import { initializeUserList } from '../reducers/userReducer'
 
 const UserInfo = ({ user }) => {
   const blogCount = user.blogs.length
   return (
     <tr>
-      <td>{user.name}</td>
+      <td><Link to={`/users/${user.id}`}>{user.name}</Link></td>
       <td>{blogCount}</td>
     </tr>
   )
 }
 
 class UserList extends React.Component {
-  componentDidMount() {
+  componentWillMount() {
     this.props.initializeUserList()
   }
 
@@ -22,11 +24,13 @@ class UserList extends React.Component {
       <div>
         <h2>users</h2>
         <table>
-          <tbody>
+          <thead>
             <tr>
               <th></th>
               <th>blogs added</th>
             </tr>
+          </thead>
+          <tbody>
             {this.props.users.map(user =>
               <UserInfo key={user.id} user={user} />
             )}

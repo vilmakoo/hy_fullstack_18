@@ -5,7 +5,7 @@ import Blog from './components/Blog'
 jest.mock('./services/blogs')
 import blogService from './services/blogs'
 
-describe.only('<App />', () => {
+describe('<App />', () => {
   let app
 
   describe('when user is not logged in', () => {
@@ -17,7 +17,7 @@ describe.only('<App />', () => {
       app.update()
 
       const blogComponents = app.find(Blog)
-      expect(blogComponents.length).toEqual(0)
+      expect(blogComponents).toHaveLength(0)
 
       const loginForm = app.find('form')
       expect(loginForm.text()).toContain('username:')
@@ -41,7 +41,7 @@ describe.only('<App />', () => {
       app.update()
 
       const blogComponents = app.find(Blog)
-      expect(blogComponents.length).toEqual(blogService.blogs.length)
+      expect(blogComponents).toHaveLength(blogService.blogs.length)
     })
   })
 })

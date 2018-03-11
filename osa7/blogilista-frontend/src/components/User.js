@@ -1,10 +1,16 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
-const User = ({ user }) => {
+const User = (props) => {
+  const { users, userId } = props
+  // console.log(props)
+
+  const user = users.find(u => u.id === userId)
+
   return (
     <div>
       <h2>{user.name}</h2>
-      <h1>Added blogs</h1>
+      <h3>Added blogs</h3>
       <ul>
         <li>blogi1</li>
         <li>blogi2</li>
@@ -13,4 +19,16 @@ const User = ({ user }) => {
   )
 }
 
-export default User
+const mapStateToProps = (state, ownProps) => {
+  // console.log(state)
+  return {
+    users: state.user.userlist,
+    userId: ownProps.userId
+  }
+}
+
+const ConnectedUser = connect(
+  mapStateToProps
+)(User)
+
+export default ConnectedUser

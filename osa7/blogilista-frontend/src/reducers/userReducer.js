@@ -13,44 +13,44 @@ const userReducer = (state = initialState, action) => {
   let newState
 
   switch (action.type) {
-    case 'INIT_USERS':
-      newState = {
-        username: state.username,
-        password: state.password,
-        user: state.user,
-        userlist: action.userlist
-      }
-      break
+  case 'INIT_USERS':
+    newState = {
+      username: state.username,
+      password: state.password,
+      user: state.user,
+      userlist: action.userlist
+    }
+    break
 
-    case 'SET_USER':
-      newState = {
-        username: '',
-        password: '',
-        user: action.user,
-        userlist: state.userlist
-      }
-      break
+  case 'SET_USER':
+    newState = {
+      username: '',
+      password: '',
+      user: action.user,
+      userlist: state.userlist
+    }
+    break
 
-    case 'LOGOUT':
-      newState = {
-        username: '',
-        password: '',
-        user: null,
-        userlist: state.userlist
-      }
-      break
+  case 'LOGOUT':
+    newState = {
+      username: '',
+      password: '',
+      user: null,
+      userlist: state.userlist
+    }
+    break
 
-    case 'SET_USERNAME':
-      newState = { ...state, username: action.username }
-      break
+  case 'SET_USERNAME':
+    newState = { ...state, username: action.username }
+    break
 
-    case 'SET_PASSWORD':
-      newState = { ...state, password: action.password }
-      break
+  case 'SET_PASSWORD':
+    newState = { ...state, password: action.password }
+    break
 
-    default:
-      newState = state
-      break
+  default:
+    newState = state
+    break
   }
 
   return newState

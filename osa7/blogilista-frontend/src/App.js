@@ -1,20 +1,20 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 import Notification from './components/Notification'
 import './index.css'
 import { notify } from './reducers/notificationReducer'
-import { initializeUser, login, logout, setUsername, setPassword } from './reducers/userReducer'
+import { initializeUserList, initializeUser, login, logout, setUsername, setPassword } from './reducers/userReducer'
 import { initializeBlogs, addLike, deleteBlog } from './reducers/blogReducer'
 import UserList from './components/UserList'
 import BlogList from './components/BlogList'
 import User from './components/User'
-import users from './services/users';
 
 class App extends React.Component {
   componentDidMount() {
     this.props.initializeBlogs()
+    this.props.initializeUserList()
     this.props.initializeUser()
   }
 
@@ -85,7 +85,7 @@ class App extends React.Component {
         <form onSubmit={this.login}>
           <div>
             username:
-              <input
+            <input
               type="text"
               name="username"
               value={this.props.user.username}
@@ -94,7 +94,7 @@ class App extends React.Component {
           </div>
           <div>
             password:
-              <input
+            <input
               type="password"
               name="password"
               value={this.props.user.password}
@@ -107,24 +107,21 @@ class App extends React.Component {
     )
 
     const loggedInView = () => {
-      const userById = (id) => {
-        this.props.users.find(user => user.id === id)
-      }
-
       return (
-      <div>
-        <p>{this.props.user.user.name} logged in <button onClick={this.logout}>logout</button></p>
+        <div>
+          <p>{this.props.user.user.name} logged in <button onClick={this.logout}>logout</button></p>
 
-        <Router>
-          <div>
-            <Route path="/users" render={() => <UserList />} />
-            <Route exact path="/" render={() => <BlogList bloglist={this.props.bloglist} handleLikeOf={this.handleLikeOf} handleDeleteOf={this.handleDeleteOf} />} />
-            <Route exact path="/users/:id" render={({ match }) =>
-              <User user={userById(match.params.id)} />}
-            />
-          </div>
-        </Router>
-      </div>
+          <Router>
+            <div>
+              <Route exact path="/users" render={() => <UserList />} />
+              <Route exact path="/" render={() => <BlogList bloglist={this.props.bloglist} handleLikeOf={this.handleLikeOf} handleDeleteOf={this.handleDeleteOf} />} />
+              <Route exact path="/users/:id" render={({ history, match }) =>
+                <User history={history} userId={match.params.id} />
+              }
+              />
+            </div>
+          </Router>
+        </div>
       )
     }
 
@@ -161,7 +158,8 @@ const mapDispatchToProps = {
   setPassword,
   initializeBlogs,
   addLike,
-  deleteBlog
+  deleteBlog,
+  initializeUserList
 }
 
 const ConnectedApp = connect(
@@ -169,4 +167,4 @@ const ConnectedApp = connect(
   mapDispatchToProps
 )(App)
 
-export default ConnectedApp;
+export default ConnectedApp
